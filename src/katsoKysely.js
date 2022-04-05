@@ -5,13 +5,13 @@ export default function katsoKysely() {
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
-        // katsoKysely kutsu, emt mikä se viel on
+        getKyselyt();
     }, []);
 
-    const //katsoKysely = () => {
+    const getKyselyt = () => {
         fetch('herokuosote??')
         .then(respose => Response.json())
-        .then()
+        .then(data => setKysely(___))
         .catch(err => console.error(err))
     }
 
