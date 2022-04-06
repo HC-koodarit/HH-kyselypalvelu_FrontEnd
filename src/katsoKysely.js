@@ -5,10 +5,10 @@ function KatsoKysely() {
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
-        fetch('herokuosote??')
-        .then(response => response.json())
-        .then(responseData => {
-            setListKysely(responseData.data)
+        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt')
+        .then(res => res.json())
+        .then(items => {
+            setListKysely(items)
         })
         .catch(err =>console.error(err))
     }, []);
@@ -16,15 +16,15 @@ function KatsoKysely() {
     return(
         <div>
             <h1>Kyselyt - Front end</h1>
+            <p>{listkysely.id}</p>
+            <p>{listkysely.nimi}</p>
+            <ul>
                 {
-                listkysely.map((person, index) => 
-                    <ul key={index} >
-                        <li>{person.first_name}</li>
-                        <li>{person.last_name}</li>
-                        <li>{person.email}</li>
-                    </ul>
-                    )
+                listkysely.map((item, index) =>
+                <li key={index}>{item.nimi}</li>
+                )
                 }
+            </ul>
         </div>
     )
 
