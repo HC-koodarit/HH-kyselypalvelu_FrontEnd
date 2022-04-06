@@ -1,11 +1,9 @@
-
+import KatsoKysely from './katsoKysely';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <KatsoKysely />
   );
 }
 
