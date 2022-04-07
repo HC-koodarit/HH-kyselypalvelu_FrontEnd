@@ -5,7 +5,7 @@ function KatsoKysely() {
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
-        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt')
+        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kaikki')
         .then(res => res.json())
         .then(items => {
             setListKysely(items)
@@ -18,16 +18,16 @@ function KatsoKysely() {
             <h1>Kyselyt - Front end</h1>
             <p>{listkysely.id}</p>
             <p>{listkysely.nimi}</p>
-            <ul>
                 {
-                listkysely.map((item, index) =>
-                <li key={index}>{item.nimi}</li>
+                listkysely.map((kysely, index) =>
+                <ul key={index}>{kysely.kysely.nimi}
+                <li>{kysely.kysymysteksti}</li>
+                </ul>
                 )
                 }
-            </ul>
+            
         </div>
     )
-
 }
 
 export default KatsoKysely;
