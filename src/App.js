@@ -1,5 +1,11 @@
-import KatsoKysely from './katsoKysely';
+import Kysely from './components/Kysely';
 import './App.css';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import {Route, Routes, Link, BrowserRouter as Router} from 'react-router-dom';
+import Customerlist from './components/Etusivu';
+
 
 function App() {
   return (
@@ -8,14 +14,12 @@ function App() {
     <AppBar position="static">
       <Router>
       <Toolbar>
-        <Link className="link" to="/">Customers</Link>
-        <Link className="link" to="/traininglist">Traininglist</Link>
-        <Link className="link" to="/calendar">Calendar</Link>
+        <Link className="link" to="/">Etusivu</Link>
+        <Link className="link" to="/kysely">Kyselyt</Link>
       </Toolbar>
       <Routes>
-        <Route exact path="/" element={<Customerlist />} />
-        <Route path="/traininglist" element={<Traininglist />} />
-        <Route path="/calendar" element={<MyCalendar />} />
+        <Route exact path="/" element={<Etusivu />} />
+        <Route path="/kysely" element={<Kysely />} />
         <Route render = {() => <h1>Page not found</h1>} />
       </Routes>
       </Router>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function KatsoKysely() {
+function Kysely() {
     const [listkysely, setListKysely] = useState([]);
     const [kysely, setKysely] = useState([]);
 
@@ -30,4 +30,4 @@ function KatsoKysely() {
     )
 }
 
-export default KatsoKysely;
+export default Kysely;
