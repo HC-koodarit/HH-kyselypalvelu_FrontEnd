@@ -4,8 +4,6 @@ import { Button } from '@mui/material';
 
 function Kysely() {
 
-    const [listkysely, setListKysely] = useState([]);
-    const [kysely, setKysely] = useState([]);
     const [kyselyt, setKyselyt] = useState([]);
 
     useEffect(() => {
@@ -33,7 +31,7 @@ function Kysely() {
                             <tr key={index}>
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
-                                <td><Button color="success" variant="contained">Vastaa</Button></td>
+                                <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Vastaa</Button></td>
                             </tr>
                         )
                     }
