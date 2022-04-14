@@ -5,7 +5,7 @@ function Kysely() {
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/kyselyt/1')
+        fetch('http://localhost:8080/kyselyt')
         .then(res => res.json())
         .then(items => {
             setListKysely(items)
