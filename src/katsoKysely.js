@@ -5,7 +5,7 @@ function KatsoKysely() {
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
-        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kaikki')
+        fetch('http://localhost:8080/kyselyt/1')
         .then(res => res.json())
         .then(items => {
             setListKysely(items)
