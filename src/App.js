@@ -13,10 +13,6 @@ function App() {
     <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Router>
-      <Toolbar>
-        <Link className="link" to="/">Etusivu</Link>
-        <Link className="link" to="/kysely">Kyselyt</Link>
-      </Toolbar>
       <Routes>
         <Route exact path="/" element={<Etusivu />} />
         <Route path="/kysely" element={<Kysely />} />
