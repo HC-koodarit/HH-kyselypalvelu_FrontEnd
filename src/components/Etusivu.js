@@ -19,8 +19,6 @@ function Kysely() {
     return(
         <div>
             <h1>ETUSIVU</h1>
-            <p>{kyselyt.id}</p>
-            <p>{kyselyt.nimi}</p>
                 {
                 kyselyt.map((kysely, index) =>
                 <ul key={index}>{kysely.nimi}
