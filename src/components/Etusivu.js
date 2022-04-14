@@ -9,25 +9,36 @@ function Kysely() {
 
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt')
-        .then(res => res.json())
-        .then(items => {
-            setKyselyt(items)
-        })
-        .catch(err =>console.error(err))
+            .then(res => res.json())
+            .then(items => {
+                setKyselyt(items)
+            })
+            .catch(err => console.error(err))
     }, []);
 
 
-    return(
+    return (
         <div>
             <h1>ETUSIVU</h1>
-                {
-                kyselyt.map((kysely, index) =>
-                <ul key={index}>{kysely.nimi}
-                <li>{kysely.kuvaus}</li>
-                </ul>
-                )
-                }
-            
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Nimi</th>
+                        <th>Kuvaus</th>
+                        <th>Vastaa</th>
+                    </tr>
+                    {
+                        kyselyt.map((kysely, index) =>
+                            <tr key={index}>
+                                <td>{kysely.nimi}</td>
+                                <td>{kysely.kuvaus}</td>
+                                <td><button>Vastaa</button></td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+
         </div>
     )
 }
