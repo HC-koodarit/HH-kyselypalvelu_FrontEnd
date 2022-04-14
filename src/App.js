@@ -16,7 +16,7 @@ function App() {
           <Router>
             <Routes>
               <Route exact path="/" element={<Etusivu />} />
-              <Route path="/kysely/:id" element={<Kysely />} />
+              <Route path="/kysely/:kyselyid" element={<Kysely />} />
               <Route render={() => <h1>Page not found</h1>} />
             </Routes>
           </Router>
