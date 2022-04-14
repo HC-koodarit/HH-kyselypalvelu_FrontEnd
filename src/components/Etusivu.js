@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Button } from '@mui/material';
 
 function Kysely() {
 
@@ -32,7 +33,7 @@ function Kysely() {
                             <tr key={index}>
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
-                                <td><button>Vastaa</button></td>
+                                <td><Button color="success" variant="contained">Vastaa</Button></td>
                             </tr>
                         )
                     }
