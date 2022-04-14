@@ -4,7 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import {Route, Routes, Link, BrowserRouter as Router} from 'react-router-dom';
-import Customerlist from './components/Etusivu';
+import Etusivu from './components/Etusivu';
 
 
 function App() {
