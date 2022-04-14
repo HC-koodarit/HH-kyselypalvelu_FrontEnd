@@ -20,7 +20,7 @@ function Kysely() {
             <p>{listkysely.nimi}</p>
                 {
                 listkysely.map((kysely, index) =>
-                <ul key={index}>{kysely.kysely.nimi}
+                <ul key={index}>{kysely.nimi}
                 <li>{kysely.kysymysteksti}</li>
                 </ul>
                 )
