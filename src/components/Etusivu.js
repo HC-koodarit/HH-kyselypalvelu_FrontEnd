@@ -16,7 +16,6 @@ function Kysely() {
             .catch(err => console.error(err))
     }, []);
 
-
     return (
         <div>
             <h1>ETUSIVU</h1>
