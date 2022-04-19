@@ -2,23 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function Kysely() {
-    const [kysely, setKysely] = useState([]);
+    const [kyselyid, setKyselyid] = useState(0);
+    const [nimi, setNimi] = useState("");
+    const [kuvaus, setKuvaus] = useState("");
     const [id, setId] = useState("");
-
 
     useEffect(() => {
         setId(window.location.href.split('/').pop());
-        fetch('http://localhost:8080/kyselyt' + id)
+        fetch('http://localhost:8080/kyselyt/' + id)
         .then(res => res.json())
-        .then(items => {
-            setKysely(items)
+        .then(data => {
+            setKyselyid(data.kyselyid)
+            setNimi(data.nimi)
+            setKuvaus(data.kuvaus)
         })
         .catch(err =>console.error(err))
     }, []);
 
     return(
         <div>
-            <h1>Kyselyt - Front end + {id}</h1>
+            <h1>Kyselyt - Front end {kyselyid} {nimi} {id}</h1>
+            <p>{kuvaus}</p>
         </div>
     )
 }
