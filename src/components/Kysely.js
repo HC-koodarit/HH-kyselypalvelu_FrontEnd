@@ -5,16 +5,19 @@ function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
     const [kuvaus, setKuvaus] = useState("");
+    const [kysymykset, setKysymykset] = useState([]);
     const [id, setId] = useState(window.location.href.split('/').pop());
     
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt/' + id)
         .then(res => res.json())
         .then(data => {
-            console.log(data.kuvaus)
             setKyselyid(data.kyselyid)
             setNimi(data.nimi)
             setKuvaus(data.kuvaus)
+            setKysymykset(data.kysymykset)
+            console.log(nimi)
+            console.log(kysymykset)
         })
         .catch(err =>console.error(err))
     }, []);
@@ -23,6 +26,20 @@ function Kysely() {
         <div>
             <h1>Kyselyt - Front end {kyselyid} {nimi} {id}</h1>
             <p>{kuvaus}</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Kysymysteksti</th>
+                    </tr>
+                    {
+                        kysymykset.map((kysymys, index) =>
+                            <tr key={index}>
+                                <td>{kysymys.kysymysteksti}</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
         </div>
     )
 }
