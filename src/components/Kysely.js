@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 function Kysely() {
-    const [listkysely, setListKysely] = useState([]);
     const [kysely, setKysely] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt')
         .then(res => res.json())
         .then(items => {
-            setListKysely(items)
+            setKysely(items)
         })
         .catch(err =>console.error(err))
     }, []);
@@ -16,15 +15,6 @@ function Kysely() {
     return(
         <div>
             <h1>Kyselyt - Front end</h1>
-            <p>{listkysely.id}</p>
-            <p>{listkysely.nimi}</p>
-                {
-                listkysely.map((kysely, index) =>
-                <ul key={index}>{kysely.nimi}
-                <li>{kysely.kysymysteksti}</li>
-                </ul>
-                )
-                }
             
         </div>
     )
