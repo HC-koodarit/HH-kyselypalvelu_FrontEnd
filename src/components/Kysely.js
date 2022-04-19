@@ -5,13 +5,13 @@ function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
     const [kuvaus, setKuvaus] = useState("");
-    const [id, setId] = useState("");
-
+    const [id, setId] = useState(window.location.href.split('/').pop());
+    
     useEffect(() => {
-        setId(window.location.href.split('/').pop());
         fetch('http://localhost:8080/kyselyt/' + id)
         .then(res => res.json())
         .then(data => {
+            console.log(data.kuvaus)
             setKyselyid(data.kyselyid)
             setNimi(data.nimi)
             setKuvaus(data.kuvaus)
