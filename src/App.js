@@ -7,7 +7,6 @@ import { Route, Routes, Link, BrowserRouter as Router } from 'react-router-dom';
 import Etusivu from './components/Etusivu';
 import { Button } from '@mui/material';
 
-
 function App() {
   return (
     <div className="App">
