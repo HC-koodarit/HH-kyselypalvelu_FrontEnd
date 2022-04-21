@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
+
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -11,20 +13,21 @@ function Kysely() {
     
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt/' + id)
-        .then(res => res.json())
-        .then(data => {
-            setKyselyid(data.kyselyid)
-            setNimi(data.nimi)
-            setKuvaus(data.kuvaus)
-            setKysymykset(data.kysymykset)
-            console.log(nimi)
-            console.log(kysymykset)
-        })
-        .catch(err =>console.error(err))
+            .then(res => res.json())
+            .then(data => {
+                setKyselyid(data.kyselyid)
+                setNimi(data.nimi)
+                setKuvaus(data.kuvaus)
+                setKysymykset(data.kysymykset)
+                console.log(nimi)
+                console.log(kysymykset)
+            })
+            .catch(err => console.error(err))
     }, []);
 
-    return(
+    return (
         <div>
+
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
@@ -41,6 +44,7 @@ function Kysely() {
                     }
                 </tbody>
             </table>
+
         </div>
     )
 }
