@@ -7,6 +7,7 @@ function Kysely() {
     const [kuvaus, setKuvaus] = useState("");
     const [kysymykset, setKysymykset] = useState([]);
     const [id, setId] = useState(window.location.href.split('/').pop());
+    const [vastaukset, setVastaukset] = useState([]);
     
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt/' + id)
