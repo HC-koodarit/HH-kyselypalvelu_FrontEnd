@@ -24,14 +24,13 @@ function Kysely() {
                     <tr>
                         <th>Nimi</th>
                         <th>Kuvaus</th>
-                        <th>Vastaa</th>
                     </tr>
                     {
                         kyselyt.map((kysely, index) =>
                             <tr key={index}>
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
-                                <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Vastaa</Button></td>
+                                <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Kyselyyn</Button></td>
                             </tr>
                         )
                     }
