@@ -24,7 +24,7 @@ function Kysely() {
 
     return(
         <div>
-            <h1>Kyselyt - Front end {kyselyid} {nimi} {id}</h1>
+            <h1>{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
                 <tbody>
