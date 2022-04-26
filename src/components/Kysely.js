@@ -25,9 +25,10 @@ function Kysely() {
             .catch(err => console.error(err))
     }, []);
 
+    
+
     return (
         <div>
-
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
@@ -39,6 +40,7 @@ function Kysely() {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
+                                <td></td>
                             </tr>
                         )
                     }
