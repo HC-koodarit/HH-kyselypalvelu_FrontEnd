@@ -12,7 +12,7 @@ function Kysely() {
     const [vastaukset, setVastaukset] = useState([]);
     
     useEffect(() => {
-        fetch('http://localhost:8080/kyselyt/' + id)
+        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
                 setKyselyid(data.kyselyid)
