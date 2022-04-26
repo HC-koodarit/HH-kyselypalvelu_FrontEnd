@@ -8,7 +8,7 @@ function Kysely() {
     const [kyselyt, setKyselyt] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/kyselyt')
+        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt')
             .then(res => res.json())
             .then(items => {
                 setKyselyt(items)
