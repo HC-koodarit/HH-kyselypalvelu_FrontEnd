@@ -25,28 +25,27 @@ function Kysely() {
     }, []);
 
 
-    const lahetaVastaukset = (e) => {
+    const handleChange = (e, index) => {
         /*
         setVastaus(e.target.value);
         console.log(vastaus);
         */
+        let newArr = [...vastaukset];
+        newArr[index] = {[e.target.value]: e.target.value.trim()}
+        setVastaukset(newArr);
+        //console.log(vastaus.id);
         setVastaukset({
+            /*
             ...vastaukset,
-      
-            // Trimming any whitespace
-            [e.target.name]: e.target.value.trim()
+            */
+            
           });
     }
 
-    const paivitaVastaukset = (e) => {
-        /*
-        let newArr = [...vastaukset];
-        newArr[index] = vastaus;
-        setVastaukset(newArr);
-        console.log(vastaus.id);
-        */
+    const sendVastaukset = (e) => {
         e.preventDefault()
         console.log(vastaukset);
+        //console.log(vastaukset.index);
    }
 
     return (
@@ -62,21 +61,21 @@ function Kysely() {
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
-                            <tr key={index}>
+                            <tr key={kysymys.kysymysid}>
                                 <td>{kysymys.kysymysteksti}</td>
                                 <td>{kysymys.kysymysid}</td>
                                 <td><input        
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={lahetaVastaukset} /></td>
+                                    onChange={handleChange} /></td>
                             </tr>
                         )
                     }
                 </tbody>
             </table>
             <div>
-                <button onClick={paivitaVastaukset}>Lähetä vastaukset</button>
+                <button onClick={sendVastaukset}>Lähetä vastaukset</button>
             </div>
         </div>
     )
