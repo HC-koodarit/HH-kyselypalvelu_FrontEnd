@@ -24,28 +24,34 @@ function Kysely() {
             .catch(err => console.error(err))
     });
 
-    /*
-    const updateItems = (vastaus, index) => {
+    const paivitaVastaukset = (vastaus, index) => {
+
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
-        setItems(newArr);
+        setVastaukset(newArr);
    }
 
-   */
+   const vastaaminen = (event) => {
+    setVastaus(event.target.value);
+}
     return (
         <div>
 
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
+            <p>testi</p>
             <table>
                 <tbody>
                     <tr>
                         <th>Kysymysteksti</th>
+                        <th>testi</th>
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
+                                <td>{kysymys.kysymysid}</td>
+                                <td><input type="text" onChange={vastaaminen} /></td>
                             </tr>
                         )
                     }
