@@ -26,22 +26,31 @@ function Kysely() {
             .catch(err => console.error(err))
     }, []);
 
-    
+    const vastaaminen = (event) => {
+        setVastaus(event.target.value);
+    }
+
+    const tallenna = () => {
+        setVastaukset(vastaus);
+    }
 
     return (
         <div>
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
+            <p>testi</p>
             <table>
                 <tbody>
                     <tr>
                         <th>Kysymysteksti</th>
+                        <th>testi</th>
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
-                                <td></td>
+                                <td>{kysymys.kysymysid}</td>
+                                <td><input type="text" onChange={vastaaminen} /></td>
                             </tr>
                         )
                     }

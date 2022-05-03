@@ -13,9 +13,14 @@
     "cors": "^2.8.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-list": "^0.8.17",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-table": "^7.7.0",
+    "survey-core": "^1.9.27",
+    "survey-jquery": "^1.9.27",
+    "survey-react": "^1.9.27",
+    "survey-react-ui": "^1.9.27",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
