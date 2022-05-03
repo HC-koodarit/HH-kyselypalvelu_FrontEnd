@@ -28,9 +28,10 @@ function Kysely() {
 
     const vastaaminen = (event) => {
         setVastaus(event.target.value);
+        console.log(vastaus);
     }
 
-    const tallenna = () => {
+    const paivitaVastaukset = () => {
         setVastaukset(vastaus);
     }
 
@@ -43,19 +44,22 @@ function Kysely() {
                 <tbody>
                     <tr>
                         <th>Kysymysteksti</th>
-                        <th>testi</th>
+                        <th>id</th>
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
                                 <td>{kysymys.kysymysid}</td>
-                                <td><input type="text" onChange={vastaaminen} /></td>
+                                <td><input type="text" onChange={paivitaVastaukset} /></td>
                             </tr>
                         )
                     }
                 </tbody>
             </table>
+            <div>
+                <button onClick={vastaaminen}>Lähetä vastaukset</button>
+            </div>
 
         </div>
     )
