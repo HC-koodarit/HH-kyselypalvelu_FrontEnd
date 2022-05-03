@@ -51,7 +51,7 @@ function Kysely() {
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
                                 <td>{kysymys.kysymysid}</td>
-                                <td><input type="text" onChange={vastaaminen} /></td>
+                                <td><input type="text" onChange={paivitaVastaukset} /></td>
                             </tr>
                         )
                     }
