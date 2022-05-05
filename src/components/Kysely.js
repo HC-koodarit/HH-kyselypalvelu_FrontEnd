@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { Alert } from 'react-alert'
+import Etusivu from '../components/Etusivu';
+import Vastaukset from '../components/Vastaukset';
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -27,59 +30,42 @@ function Kysely() {
     }
 
     const handleChange = (e, index, kysymysid) => {
-        setVastaus({vastausteksti: e.target.value, kysymys: {kysymysid: kysymysid}});
+        setVastaus({ vastausteksti: e.target.value, kysymys: { kysymysid: kysymysid } });
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
         setVastaukset(newArr);
         console.log(vastaukset);
         //console.log(vastaus.id);
     }
-/*
-    const sendVastaukset = (e) => {
-        e.preventDefault()
-        console.log(vastaukset);
-   }
-*/
-   const saveVastaukset = (vastaukset) => {
-    var cache = [];
-    fetch('http://localhost:8080/vastaukset/', {
-       method: 'POST', 
-       headers: {
-          'Content-Type': 'application/json'
-       },
-       
-       body: JSON.stringify(vastaukset, (key, value) => {
-           if (typeof value === 'object' && value !== null) {
-               if (cache.includes(value)) return;
-               cache.push(value);
-           }
-           return value;
-       })
-       
-    }) 
-    .then(res => fetchData())
-    .catch(err => console.error(err))
-    console.log(vastaukset);
-    cache = null;
- }
+
+    function saveVastaukset() {
+        fetch('http://localhost:8080/vastaukset', {
+
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(vastaukset)
+
+        })
+
+    }
 
     return (
         <div>
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
-            <p>testi</p>
             <table>
                 <tbody>
                     <tr>
                         <th>Kysymysteksti</th>
-                        <th>id</th>
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
-                                <td>{kysymys.kysymysid} {index}</td>
-                                <td><input        
+                                <td><input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
@@ -90,7 +76,15 @@ function Kysely() {
                 </tbody>
             </table>
             <div>
-                <button onClick={saveVastaukset}>Lähetä vastaukset</button>
+                <Button
+                    color="success" variant="contained"
+                    onClick={() => {
+                    saveVastaukset();
+                    alert("Kysymyksiin vastattu!");
+                    }}
+                >Lähetä vastaukset</Button>
+                <Button color="primary" variant="contained" href={`/`}>Etusivu</Button>
+                <Button color="primary" variant="contained" href={`/vastaukset/${kyselyid}`}>Vastaukset</Button>
             </div>
         </div>
     )

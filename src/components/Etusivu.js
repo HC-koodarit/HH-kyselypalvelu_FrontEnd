@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 
-function Kysely() {
+function Etusivu() {
 
 
     const [kyselyt, setKyselyt] = useState([]);
@@ -46,4 +46,4 @@ function Kysely() {
 
 }
 
-export default Kysely;
+export default Etusivu;
