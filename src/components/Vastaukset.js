@@ -32,7 +32,7 @@ function Vastaukset() {
         <div>
             <h2>{kysymys.kysymysteksti}</h2>
             <ul>{
-                vastaukset.filter(vastaus => vastaus.kysymys.kysymysid == kysymys.kysymysid).map((kysymyksenVastaus) =>
+                vastaukset.filter(vastaus => vastaus.kysymys.kysymysid === kysymys.kysymysid).map((kysymyksenVastaus) =>
                     <li>{kysymyksenVastaus.vastausteksti}</li>
                 )
             }</ul>

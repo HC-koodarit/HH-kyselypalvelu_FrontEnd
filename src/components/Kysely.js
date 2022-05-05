@@ -10,8 +10,8 @@ function Kysely() {
     const [kysymykset, setKysymykset] = useState([]);
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
-    const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
-    
+    const [vastaus, setVastaus] = useState({ vastausteksti: "", kysymys: "" });
+
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
@@ -26,7 +26,7 @@ function Kysely() {
 
 
     const handleChange = (e, index, kysymysid) => {
-        setVastaus({vastausteksti: e.target.value, kysymys: {kysymysid: kysymysid}});
+        setVastaus({ vastausteksti: e.target.value, kysymys: { kysymysid: kysymysid } });
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
         setVastaukset(newArr);
@@ -34,11 +34,19 @@ function Kysely() {
         //console.log(vastaus.id);
     }
 
-    const sendVastaukset = (e) => {
-        e.preventDefault()
-        console.log(vastaukset);
-        //console.log(vastaukset.index);
-   }
+    function saveVastaukset() {
+        fetch('http://localhost:8080/vastaukset', {
+
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(vastaukset)
+
+        })
+
+    }
 
     return (
         <div>
@@ -56,7 +64,7 @@ function Kysely() {
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
                                 <td>{kysymys.kysymysid} {index}</td>
-                                <td><input        
+                                <td><input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
@@ -67,7 +75,7 @@ function Kysely() {
                 </tbody>
             </table>
             <div>
-                <button onClick={sendVastaukset}>Lähetä vastaukset</button>
+                <button onClick={saveVastaukset}>Lähetä vastaukset</button>
             </div>
         </div>
     )
