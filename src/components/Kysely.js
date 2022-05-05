@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { Alert } from 'react-alert'
+import Etusivu from '../components/Etusivu';
+import Vastaukset from '../components/Vastaukset';
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -10,6 +13,7 @@ function Kysely() {
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
     const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
+
     
     useEffect(() => fetchData(), []);
 
@@ -72,7 +76,15 @@ function Kysely() {
                 </tbody>
             </table>
             <div>
-                <button onClick={saveVastaukset}>Lähetä vastaukset</button>
+                <Button
+                    color="success" variant="contained"
+                    onClick={() => {
+                    saveVastaukset();
+                    alert("Kysymyksiin vastattu!");
+                    }}
+                >Lähetä vastaukset</Button>
+                <Button color="primary" variant="contained" href={`/`}>Etusivu</Button>
+                <Button color="primary" variant="contained" href={`/vastaukset/${kyselyid}`}>Vastaukset</Button>
             </div>
         </div>
     )
