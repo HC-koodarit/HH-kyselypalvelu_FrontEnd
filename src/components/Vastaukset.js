@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Button } from '@mui/material';
 
 function Vastaukset() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -41,6 +41,7 @@ function Vastaukset() {
 
     return (
         <div>
+            <Button color="success" variant="contained" href={`/`}>Etusivu</Button>
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
             <h1>Vastaukset</h1>
