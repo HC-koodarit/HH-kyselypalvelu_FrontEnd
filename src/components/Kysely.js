@@ -10,6 +10,7 @@ function Kysely() {
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
     const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
+
     
     useEffect(() => fetchData(), []);
 
@@ -40,16 +41,26 @@ function Kysely() {
    }
 */
    const saveVastaukset = (vastaukset) => {
+    var cache = [];
     fetch('http://localhost:8080/vastaukset/', {
        method: 'POST', 
        headers: {
           'Content-Type': 'application/json'
        },
-       body: JSON.stringify(vastaukset)
+       
+       body: JSON.stringify(vastaukset, (key, value) => {
+           if (typeof value === 'object' && value !== null) {
+               if (cache.includes(value)) return;
+               cache.push(value);
+           }
+           return value;
+       })
+       
     }) 
     .then(res => fetchData())
     .catch(err => console.error(err))
     console.log(vastaukset);
+    cache = null;
  }
 
     return (
