@@ -33,8 +33,8 @@ function Etusivu() {
                             <tr key={index}>
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
-                                <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Kyselyyn</Button></td>
-                                <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.kyselyid}`}>Vastaukset</Button></td>
+                                <td><Button color="success" variant="contained" href={`kysely/${kysely.id}`}>Kyselyyn</Button></td>
+                                <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.id}`}>Vastaukset</Button></td>
                             </tr>
                         )
                     }
