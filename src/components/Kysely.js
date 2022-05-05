@@ -25,21 +25,13 @@ function Kysely() {
     }, []);
 
 
-    const handleChange = (e, index) => {
-        /*
-        setVastaus(e.target.value);
-        console.log(vastaus);
-        */
+    const handleChange = (e, index, kysymysid) => {
+        setVastaus({vastausteksti: e.target.value, kysymys: {kysymysid: kysymysid}});
         let newArr = [...vastaukset];
-        newArr[index] = {[e.target.value]: e.target.value.trim()}
+        newArr[index] = vastaus;
         setVastaukset(newArr);
+        console.log(vastaukset);
         //console.log(vastaus.id);
-        setVastaukset({
-            /*
-            ...vastaukset,
-            */
-            
-          });
     }
 
     const sendVastaukset = (e) => {
@@ -61,14 +53,14 @@ function Kysely() {
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
-                            <tr key={kysymys.kysymysid}>
+                            <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
-                                <td>{kysymys.kysymysid}</td>
+                                <td>{kysymys.kysymysid} {index}</td>
                                 <td><input        
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={handleChange} /></td>
+                                    onChange={(e) => handleChange(e, index, kysymys.kysymysid)} /></td>
                             </tr>
                         )
                     }

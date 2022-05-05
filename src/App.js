@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Route, Routes, Link, BrowserRouter as Router } from 'react-router-dom';
 import Etusivu from './components/Etusivu';
 import { Button } from '@mui/material';
+import Vastaukset from './components/Vastaukset';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Etusivu />} />
               <Route path="/kysely/:kyselyid" element={<Kysely />} />
+              <Route path="/vastaukset/:kyselyid" element={<Vastaukset />} />
               <Route render={() => <h1>Page not found</h1>} />
             </Routes>
           </Router>

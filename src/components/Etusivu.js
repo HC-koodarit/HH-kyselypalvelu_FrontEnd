@@ -8,7 +8,8 @@ function Kysely() {
     const [kyselyt, setKyselyt] = useState([]);
 
     useEffect(() => {
-        fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt')
+        fetch('http://localhost:8080/kyselyt')
+        //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt
             .then(res => res.json())
             .then(items => {
                 setKyselyt(items)
@@ -24,6 +25,8 @@ function Kysely() {
                     <tr>
                         <th>Nimi</th>
                         <th>Kuvaus</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     {
                         kyselyt.map((kysely, index) =>
@@ -31,6 +34,7 @@ function Kysely() {
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
                                 <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Kyselyyn</Button></td>
+                                <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.kyselyid}`}>Vastaukset</Button></td>
                             </tr>
                         )
                     }
