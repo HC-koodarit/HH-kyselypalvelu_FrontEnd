@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 
+
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
@@ -11,6 +12,8 @@ function Kysely() {
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
     const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
+    const [vastausLista, setVastausLista] = useState([]);
+    const [lista, setLista] = useState([])
     
     useEffect(() => {
         fetch('http://localhost:8080/kyselyt/' + id)
@@ -25,27 +28,40 @@ function Kysely() {
     }, []);
 
 
-    const handleChange = (e, index) => {
-        /*
-        setVastaus(e.target.value);
-        console.log(vastaus);
-        */
+    const handleChange = (e) => {
+        setVastaukset(
+            ...[e.target.value]
+          );
+    }
+
+    const tallennaVastaus = () => {
         let newArr = [...vastaukset];
-        newArr[index] = {[e.target.value]: e.target.value.trim()}
-        setVastaukset(newArr);
-        //console.log(vastaus.id);
-        setVastaukset({
-            /*
-            ...vastaukset,
-            */
-            
-          });
+        //newArr[index] = vastaus;
+        
+        newArr.push(vastaukset);
+        setVastausLista(newArr + [...vastaukset]);
+        console.log(vastaukset);
+        console.log(newArr);
     }
 
     const sendVastaukset = (e) => {
         e.preventDefault()
-        console.log(vastaukset);
-        //console.log(vastaukset.index);
+        let newArr = [...vastaukset];
+        //newArr[index] = vastaus;
+        
+        newArr.push(vastaukset);
+        setVastausLista(newArr + [...vastaukset]);
+        console.log("vastaukset " + vastaukset);
+        console.log("newarr " + newArr);
+        /*
+        let newArr = [...vastaukset];
+        newArr[index] = vastaus;
+        setVastaukset(newArr);
+        console.log(vastaus.id);
+        */
+        e.preventDefault()
+        //console.log(vastaukset);
+        console.log("vastauslista " + vastausLista);
    }
 
     return (
@@ -61,9 +77,10 @@ function Kysely() {
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
-                            <tr key={kysymys.kysymysid}>
+                            <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
                                 <td>{kysymys.kysymysid}</td>
+                                <td><button onClick={tallennaVastaus}>Vastaa</button></td>
                                 <td><input        
                                     type="text"
                                     placeholder="Vastaa"
