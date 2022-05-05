@@ -17,7 +17,7 @@ function Kysely() {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
-                setKyselyid(data.kyselyid);
+                setKyselyid(data.id);
                 setNimi(data.nimi);
                 setKuvaus(data.kuvaus);
                 setKysymykset(data.kysymykset);
@@ -26,12 +26,12 @@ function Kysely() {
     }
 
     const handleChange = (e, index, kysymysid) => {
-        setVastaus({ vastausteksti: e.target.value, kysymys: { kysymysid: kysymysid } });
+        console.log(e.target.value);
+        setVastaus({ vastausteksti: e.target.value, kysymys: { id: kysymysid } });
+        console.log(vastaus);
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
         setVastaukset(newArr);
-        console.log(vastaukset);
-        //console.log(vastaus.id);
     }
 
     function saveVastaukset() {
@@ -52,23 +52,20 @@ function Kysely() {
         <div>
             <h1>{nimi}</h1>
             <p>{kuvaus}</p>
-            <p>testi</p>
             <table>
                 <tbody>
                     <tr>
                         <th>Kysymysteksti</th>
-                        <th>id</th>
                     </tr>
                     {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
-                                <td>{kysymys.kysymysid} {index}</td>
                                 <td><input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={(e) => handleChange(e, index, kysymys.kysymysid)} /></td>
+                                    onChange={(e) => handleChange(e, index, kysymys.id)} /></td>
                             </tr>
                         )
                     }

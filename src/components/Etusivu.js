@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 
-function Kysely() {
+function Etusivu() {
 
 
     const [kyselyt, setKyselyt] = useState([]);
@@ -33,8 +33,8 @@ function Kysely() {
                             <tr key={index}>
                                 <td>{kysely.nimi}</td>
                                 <td>{kysely.kuvaus}</td>
-                                <td><Button color="success" variant="contained" href={`kysely/${kysely.kyselyid}`}>Kyselyyn</Button></td>
-                                <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.kyselyid}`}>Vastaukset</Button></td>
+                                <td><Button color="success" variant="contained" href={`kysely/${kysely.id}`}>Kyselyyn</Button></td>
+                                <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.id}`}>Vastaukset</Button></td>
                             </tr>
                         )
                     }
@@ -46,4 +46,4 @@ function Kysely() {
 
 }
 
-export default Kysely;
+export default Etusivu;

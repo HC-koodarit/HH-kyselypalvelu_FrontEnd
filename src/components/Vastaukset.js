@@ -13,7 +13,7 @@ function Vastaukset() {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
-                setKyselyid(data.kyselyid);
+                setKyselyid(data.id);
                 setNimi(data.nimi);
                 setKuvaus(data.kuvaus);
                 setKysymykset(data.kysymykset);
@@ -32,7 +32,7 @@ function Vastaukset() {
         <div>
             <h2>{kysymys.kysymysteksti}</h2>
             <ul>{
-                vastaukset.filter(vastaus => vastaus.kysymys.kysymysid === kysymys.kysymysid).map((kysymyksenVastaus) =>
+                vastaukset.filter(vastaus => vastaus.kysymys.id == kysymys.id).map((kysymyksenVastaus) =>
                     <li>{kysymyksenVastaus.vastausteksti}</li>
                 )
             }</ul>
