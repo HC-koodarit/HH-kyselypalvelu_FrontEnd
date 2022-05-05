@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-
-
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
@@ -12,10 +10,10 @@ function Kysely() {
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
     const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
-    const [vastausLista, setVastausLista] = useState([]);
-    const [lista, setLista] = useState([])
     
-    useEffect(() => {
+    useEffect(() => fetchData(), []);
+
+    const fetchData = () => {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
@@ -25,44 +23,34 @@ function Kysely() {
                 setKysymykset(data.kysymykset);
             })
             .catch(err => console.error(err))
-    }, []);
-
-
-    const handleChange = (e) => {
-        setVastaukset(
-            ...[e.target.value]
-          );
     }
 
-    const tallennaVastaus = () => {
-        let newArr = [...vastaukset];
-        //newArr[index] = vastaus;
-        
-        newArr.push(vastaukset);
-        setVastausLista(newArr + [...vastaukset]);
-        console.log(vastaukset);
-        console.log(newArr);
-    }
-
-    const sendVastaukset = (e) => {
-        e.preventDefault()
-        let newArr = [...vastaukset];
-        //newArr[index] = vastaus;
-        
-        newArr.push(vastaukset);
-        setVastausLista(newArr + [...vastaukset]);
-        console.log("vastaukset " + vastaukset);
-        console.log("newarr " + newArr);
-        /*
+    const handleChange = (e, index, kysymysid) => {
+        setVastaus({vastausteksti: e.target.value, kysymys: {kysymysid: kysymysid}});
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
         setVastaukset(newArr);
-        console.log(vastaus.id);
-        */
+        console.log(vastaukset);
+        //console.log(vastaus.id);
+    }
+/*
+    const sendVastaukset = (e) => {
         e.preventDefault()
-        //console.log(vastaukset);
-        console.log("vastauslista " + vastausLista);
+        console.log(vastaukset);
    }
+*/
+   const saveVastaukset = (vastaukset) => {
+    fetch('http://localhost:8080/vastaukset/', {
+       method: 'POST', 
+       headers: {
+          'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(vastaukset)
+    }) 
+    .then(res => fetchData())
+    .catch(err => console.error(err))
+    console.log(vastaukset);
+ }
 
     return (
         <div>
@@ -79,20 +67,19 @@ function Kysely() {
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
                                 <td>{kysymys.kysymysteksti}</td>
-                                <td>{kysymys.kysymysid}</td>
-                                <td><button onClick={tallennaVastaus}>Vastaa</button></td>
+                                <td>{kysymys.kysymysid} {index}</td>
                                 <td><input        
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={handleChange} /></td>
+                                    onChange={(e) => handleChange(e, index, kysymys.kysymysid)} /></td>
                             </tr>
                         )
                     }
                 </tbody>
             </table>
             <div>
-                <button onClick={sendVastaukset}>Lähetä vastaukset</button>
+                <button onClick={saveVastaukset}>Lähetä vastaukset</button>
             </div>
         </div>
     )
