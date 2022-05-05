@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
@@ -10,9 +9,11 @@ function Kysely() {
     const [kysymykset, setKysymykset] = useState([]);
     const [id, setId] = useState(window.location.href.split('/').pop());
     const [vastaukset, setVastaukset] = useState([]);
-    const [vastaus, setVastaus] = useState({ vastausteksti: "", kysymys: "" });
+    const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
+    
+    useEffect(() => fetchData(), []);
 
-    useEffect(() => {
+    const fetchData = () => {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
@@ -22,8 +23,7 @@ function Kysely() {
                 setKysymykset(data.kysymykset);
             })
             .catch(err => console.error(err))
-    }, []);
-
+    }
 
     const handleChange = (e, index, kysymysid) => {
         setVastaus({ vastausteksti: e.target.value, kysymys: { kysymysid: kysymysid } });
