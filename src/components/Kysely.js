@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { Alert } from 'react-alert'
-import Etusivu from '../components/Etusivu';
-import Vastaukset from '../components/Vastaukset';
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
