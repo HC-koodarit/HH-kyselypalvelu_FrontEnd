@@ -4,15 +4,13 @@ import { Button } from '@mui/material';
 import '../App.css';
 
 function Etusivu() {
-
-
     const [kyselyt, setKyselyt] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        fetchKysely();
     }, []);
 
-    const fetchData = () => {
+    const fetchKysely = () => {
         fetch('http://localhost:8080/kyselyt')
             //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt
             .then(res => res.json())
