@@ -39,7 +39,7 @@ function Vastaukset() {
     const kysymyslista = kysymykset.map((kysymys) =>
         <div>
             <h2>{kysymys.kysymysteksti}</h2>
-            <ul>{
+            <ul className='nobullets'>{
                 vastaukset.filter(vastaus => vastaus.kysymys.id == kysymys.id).map((kysymyksenVastaus) =>
                     <li>{kysymyksenVastaus.vastausteksti}</li>
                 )
