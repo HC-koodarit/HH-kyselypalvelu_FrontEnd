@@ -43,7 +43,6 @@ function Etusivu() {
                                 <td>{kysely.kuvaus}</td>
                                 <td><Button color="success" variant="contained" href={`kysely/${kysely.id}`}>Kyselyyn</Button></td>
                                 <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.id}`}>Vastaukset</Button></td>
-                                <td><Button color="primary" variant="contained" href="Statistiikka.js">Statistiikka</Button></td>
                             </tr>
                         )
                     }

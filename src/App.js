@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App" id="tabscss">
       <div>
-      <Tabs value={value} onChange={handleTabChange} inkBarStyle={{background: 'blue'}}>
+      <Tabs value={value} onChange={handleTabChange}>
         <Tab value="etusivu" label="Etusivu"/>
         <Tab value="statistiikka" label="Statistiikka"/>
       </Tabs>
