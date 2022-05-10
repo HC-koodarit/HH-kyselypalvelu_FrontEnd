@@ -19,7 +19,9 @@ function Etusivu() {
     }, []);
 
     return (
-        <div>
+        <div style={{
+            backgroundColor: '#282c34',
+          }}>
             <h1>ETUSIVU</h1>
             <table>
                 <tbody>

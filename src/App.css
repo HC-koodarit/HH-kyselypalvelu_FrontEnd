@@ -36,14 +36,14 @@
     transform: rotate(360deg);
   }
 }
-/*
+
 body {
   background-color: #282c34;
-  color: white;
+  color: #282c34;
   padding: 40px;
   font-family: Arial;
   text-align: center;
-}*/
+}
 
 div {
     color: white;
@@ -80,7 +80,7 @@ th {
 }
 
 td {
-  background-color: #bfd6fd;
+  background-color: #ffffff;
   border-radius: 5px;
   padding-top: 2px;
   border-spacing: 5%;

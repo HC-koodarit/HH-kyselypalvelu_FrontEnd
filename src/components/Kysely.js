@@ -51,11 +51,13 @@ function Kysely() {
     }
 
     return (
-        <div>
+        <div style={{
+            backgroundColor: '#282c34',
+          }}>
             <h1 >{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
-                <tbody>
+                <tbody> 
                     <tr>
  
                     </tr>
@@ -67,7 +69,6 @@ function Kysely() {
                                     placeholder="Vastaa"
                                     value={vastaus.id}
                                     onChange={(e) => handleChange(e, index, kysymys.id)} /></td></td>
-
                             </tr>
                         )
                     }
