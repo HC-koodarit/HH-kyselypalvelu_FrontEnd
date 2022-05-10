@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
+import '../App.css';
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -51,22 +52,22 @@ function Kysely() {
 
     return (
         <div>
-            <h1>{nimi}</h1>
+            <h1 >{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
                 <tbody>
                     <tr>
-                        <th>Kysymysteksti</th>
+ 
                     </tr>
-                    {
+                    { 
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
-                                <td>{kysymys.kysymysteksti}</td>
-                                <td><input
+                                <td>{kysymys.kysymysteksti}                                <td><input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={(e) => handleChange(e, index, kysymys.id)} /></td>
+                                    onChange={(e) => handleChange(e, index, kysymys.id)} /></td></td>
+
                             </tr>
                         )
                     }

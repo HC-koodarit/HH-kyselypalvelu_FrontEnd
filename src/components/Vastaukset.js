@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
+import '../App.css';
 
 function Vastaukset() {
     const [kyselyid, setKyselyid] = useState(0);

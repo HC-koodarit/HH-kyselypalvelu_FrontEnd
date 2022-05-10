@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+/*
+body {
+  background-color: #282c34;
+  color: white;
+  padding: 40px;
+  font-family: Arial;
+  text-align: center;
+}*/
+
+div {
+    color: white;
+    align-items: center;
+}
+
+form {
+  align-items: center;
+}
+
+.tbody {
+  align-items: left;
+  color: black;
+}
+
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+table {
+  border-collapse: separate;
+  margin: 25px 0;
+  font-size: 1,2em;
+  color: black;
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+th {
+  color: pink;
+}
+
+td {
+  background-color: #bfd6fd;
+  border-radius: 5px;
+  padding-top: 2px;
+  border-spacing: 5%;
+}
