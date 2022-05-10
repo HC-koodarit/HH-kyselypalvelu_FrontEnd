@@ -53,24 +53,6 @@ function Etusivu() {
             <button className="btn btn-outline-info" onClick={() => setButtonPopup(true)}>Album ID's here</button>
             <div>
                 <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    <table id="tablecss">
-                        <tbody>
-                            <tr>
-                                <td>ID</td>
-                                <td>Name</td>
-                                <td>Artist</td>
-                            </tr>
-                            {
-                            listalbumnames.map((album, index) => 
-                                <tr key={index} >
-                                    <td>{album.albumid}</td>
-                                    <td>{album.name}</td>
-                                    <td>{album.artist}</td>
-                                </tr>
-                            )
-                            }
-                        </tbody>
-                    </table>
                 </PopUp>
             </div>
         </div>
