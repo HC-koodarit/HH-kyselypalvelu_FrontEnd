@@ -29,12 +29,14 @@ function Kysely() {
     }
 
     const handleChange = (e, index, kysymysid) => {
-        console.log(e.target.value);
+        
         setVastaus({ vastausteksti: e.target.value, kysymys: { id: kysymysid } });
-        console.log(vastaus);
+        
         let newArr = [...vastaukset];
         newArr[index] = vastaus;
         setVastaukset(newArr);
+        console.log(e.target.value);
+        console.log(vastaus);
     }
 
     function saveVastaukset() {
@@ -56,7 +58,7 @@ function Kysely() {
             backgroundColor: '#282c34',
             alignItems: 'center'
           }}>
-            <h1 >{nimi}</h1>
+            <h1>{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
                 <tbody> 
@@ -65,9 +67,9 @@ function Kysely() {
                     { 
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
-                                <td>{kysymys.kysymysteksti}<td><input
+                                <td>{kysymys.kysymysteksti}<td><input className='input-element'
                                     type="text"
-                                    placeholder="Vastaa"
+                                    placeholder="vastaa"
                                     value={vastaus.id}
                                     onChange={(e) => handleChange(e, index, kysymys.id)} /></td></td>
                             </tr>
@@ -80,6 +82,7 @@ function Kysely() {
                     color="success" variant="contained"
                     onClick={() => {
                     saveVastaukset();
+                    setVastaus("");
                     alert("Kysymyksiin vastattu!");
                     }}
                 >Lähetä vastaukset</Button>

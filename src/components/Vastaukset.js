@@ -45,7 +45,7 @@ function Vastaukset() {
             backgroundColor: '#282c34',
           }}>
             <Button color="success" variant="contained" href={`/`}>Etusivu</Button>
-            <h1>{nimi}</h1>
+            <h1 className='h1'>{nimi}</h1>
             <p>{kuvaus}</p>
             <h1>Vastaukset</h1>
             <div>{kysymyslista}</div>
