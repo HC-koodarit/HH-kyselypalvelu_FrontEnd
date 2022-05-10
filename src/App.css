@@ -37,12 +37,13 @@
   }
 }
 
-body {
-  background-color: #282c34;
+#app {
+  background-color: white;
   color: #282c34;
   padding: 40px;
   font-family: Arial;
   text-align: center;
+  margin: 20px;
 }
 
 .input-element{
@@ -83,4 +84,7 @@ td {
 .h1 {
   align-content: left;
   color: grey;
+}
+#tabscss {
+  color: white !important;
 }

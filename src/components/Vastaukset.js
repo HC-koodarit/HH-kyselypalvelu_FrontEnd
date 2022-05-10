@@ -11,6 +11,20 @@ function Vastaukset() {
     const [vastaukset, setVastaukset] = useState([]);
 
     useEffect(() => {
+        fetchVastaukset();
+        fetchKysely();
+    }, []);
+
+    const fetchVastaukset = () => {
+        fetch('http://localhost:8080/kyselyt/' + id + '/vastaukset')
+            .then(res => res.json())
+            .then(data => {
+                setVastaukset(data);
+            })
+            .catch(err => console.error(err))
+    }
+
+    const fetchKysely = () => {
         fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
@@ -20,14 +34,7 @@ function Vastaukset() {
                 setKysymykset(data.kysymykset);
             })
             .catch(err => console.error(err))
-
-        fetch('http://localhost:8080/kyselyt/' + id + '/vastaukset')
-            .then(res => res.json())
-            .then(data => {
-                setVastaukset(data);
-            })
-            .catch(err => console.error(err))
-    }, []);
+    }
 
     const kysymyslista = kysymykset.map((kysymys) =>
         <div>

@@ -4,27 +4,32 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Route, Routes, Link, BrowserRouter as Router } from 'react-router-dom';
+import React, { useState } from 'react';
 import Etusivu from './components/Etusivu';
+import Statistiikka from './components/Statistiikka';
 import { Button } from '@mui/material';
 import Vastaukset from './components/Vastaukset';
-import { Navigate } from 'react-router-dom';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 function App() {
+  const [value, setValue] = useState('etusivu');
+  const handleTabChange = (event, value) => {
+    setValue(value);
+  };
+
   return (
-    <div className="App">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">     
-          <Router>
-            <navbar />
-            <Routes>
-              <Route exact path="/" element={<Etusivu />} />
-              <Route path="/kysely/:kyselyid" element={<Kysely />} />
-              <Route path="/vastaukset/:kyselyid" element={<Vastaukset />} />
-              <Route render={() => <h1>Page not found</h1>} />
-            </Routes>
-          </Router>
-        </AppBar>
-      </Box>
+    <div className="App" id="tabscss">
+      <div>
+      <Tabs value={value} onChange={handleTabChange} inkBarStyle={{background: 'blue'}}>
+        <Tab value="etusivu" label="Etusivu"/>
+        <Tab value="statistiikka" label="Statistiikka"/>
+      </Tabs>
+      </div>
+      <div id="app">
+      {value === "etusivu" && <Etusivu />}
+      {value === "statistiikka" && <Statistiikka />}
+      </div>
     </div>
   );
 }
