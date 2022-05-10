@@ -7,13 +7,15 @@ import { Route, Routes, Link, BrowserRouter as Router } from 'react-router-dom';
 import Etusivu from './components/Etusivu';
 import { Button } from '@mui/material';
 import Vastaukset from './components/Vastaukset';
+import { Navigate } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static">     
           <Router>
+            <navbar />
             <Routes>
               <Route exact path="/" element={<Etusivu />} />
               <Route path="/kysely/:kyselyid" element={<Kysely />} />

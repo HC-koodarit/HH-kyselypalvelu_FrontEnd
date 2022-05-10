@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import '../App.css';
+import { CenterFocusStrong } from '@mui/icons-material';
 
 function Kysely() {
     const [kyselyid, setKyselyid] = useState(0);
@@ -53,18 +54,18 @@ function Kysely() {
     return (
         <div style={{
             backgroundColor: '#282c34',
+            alignItems: 'center'
           }}>
             <h1 >{nimi}</h1>
             <p>{kuvaus}</p>
             <table>
                 <tbody> 
                     <tr>
- 
                     </tr>
                     { 
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
-                                <td>{kysymys.kysymysteksti}                                <td><input
+                                <td>{kysymys.kysymysteksti}<td><input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}

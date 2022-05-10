@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1156e1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,24 +45,15 @@ body {
   text-align: center;
 }
 
-div {
-    color: white;
-    align-items: center;
-}
-
 form {
   align-items: center;
 }
 
-.tbody {
-  align-items: left;
-  color: black;
-}
-
-ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
+.nobullets {
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0;
+  color: grey; 
 }
 
 table {
@@ -72,16 +63,18 @@ table {
   color: black;
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  text-align: left;
+  text-align: center;
 }
 
 th {
-  color: pink;
+  color: rgb(255, 255, 255);
 }
 
 td {
   background-color: #ffffff;
-  border-radius: 5px;
-  padding-top: 2px;
-  border-spacing: 5%;
+  border-radius: 2px;
+  padding-top: 1px;
+  border-spacing: 10%;
+  width: 100%
+  fit-content
 }
