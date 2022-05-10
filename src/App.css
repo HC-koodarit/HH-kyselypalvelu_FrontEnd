@@ -37,12 +37,13 @@
   }
 }
 
-body {
-  background-color: #282c34;
+#app {
+  background-color: white;
   color: #282c34;
   padding: 40px;
   font-family: Arial;
   text-align: center;
+  margin: 20px;
 }
 
 div {
@@ -84,4 +85,8 @@ td {
   border-radius: 5px;
   padding-top: 2px;
   border-spacing: 5%;
+}
+
+#tabscss {
+  color: white !important;
 }

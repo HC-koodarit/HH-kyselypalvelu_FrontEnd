@@ -13,7 +13,9 @@ function Kysely() {
     const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: ""});
 
     
-    useEffect(() => fetchData(), []);
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const fetchData = () => {
         fetch('http://localhost:8080/kyselyt/' + id)
@@ -58,17 +60,16 @@ function Kysely() {
             <p>{kuvaus}</p>
             <table>
                 <tbody> 
-                    <tr>
- 
-                    </tr>
                     { 
                         kysymykset.map((kysymys, index) =>
                             <tr key={index}>
-                                <td>{kysymys.kysymysteksti}                                <td><input
+                                <td>{kysymys.kysymysteksti}<td>
+                                    <input
                                     type="text"
                                     placeholder="Vastaa"
                                     value={vastaus.id}
-                                    onChange={(e) => handleChange(e, index, kysymys.id)} /></td></td>
+                                    onChange={(e) => handleChange(e, index, kysymys.id)} />
+                                    </td></td>
                             </tr>
                         )
                     }
