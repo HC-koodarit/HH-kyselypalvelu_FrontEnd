@@ -11,9 +11,7 @@ export default function Kysely(props) {
     const kyselyId = id;
 
     const [kysymykset, setKysymykset] = useState([]);
-
-    const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
-
+    //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
     const [tekstivastaus, setTekstivastaus] = useState({vastausteksti: "", kysymys: { id : null }});
 
     let kIndex = 0;
@@ -27,33 +25,23 @@ export default function Kysely(props) {
             .then(res => res.json())
             .then(data => {
                 setKysymykset(data.kysymykset);
+                console.log(data.kysymykset);
             })
             .catch(err => console.error(err))
     }
 
-    /*const inputChanged = (e, index, kysymysid) => {
-        
-        setVastaus({ vastausteksti: e.target.value, kysymys: { id: kysymysid } });
-        
-        let newArr = [...vastaukset];
-        newArr[index] = vastaus;
-        setVastaukset(newArr);
-        console.log(e.target.value);
-        console.log(vastaus);
+    /*const monivalintaHandleChange = (e) => {
+        setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
     }*/
 
-    /*
-    const monivalintaInputChanged = (e) => {
-        setVastaus({ kayttajanvastaus: e.target.value, kysymys: { kysymysid: e.target.getAttribute('data-key') } });
-    }*/
-
-    const textInputChanged = (e) => {
+    const HandleChange = (e) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
     }
 
-    console.log(tekstivastaus);
-    console.log(kysymykset);
-
+    //console.log(tekstivastaus);
+    //console.log(kysymykset);
+    //console.log(kysymykset.kysymystyyppi)
+   
     async function saveVastaukset () {
         const response = await fetch('http://localhost:8080/vastaukset', {
             method: 'POST',
@@ -74,20 +62,72 @@ export default function Kysely(props) {
     }
 
     const monivalintaVaiTeksti = (k) => {
-        kIndex = kIndex + 1;
-        return (
-            <div>
-                <h4>{k.kysymysteksti}</h4>
-                <input
-                    data-key={k.id}
-                    type="text"
-                    name={kIndex}
-                    onChange={textInputChanged}
-                />
-            </div>
-        )
+        if (k.kysymystyyppi.nimi === "Avoinkysymys") {
+            kIndex = kIndex + 1;
+            return (
+                <div>
+                    <h4>{k.kysymysteksti}</h4>
+                    <input
+                        className="form-control_teksti"
+                        data-key={k.id}
+                        type="text"
+                        name={kIndex}
+                        onChange={HandleChange}
+                    />
+                </div>
+            )
+        } else if (k.kysymystyyppi.nimi === "Valintanappikysymys") {
+            kIndex = kIndex + 1;
+            return (
+                <div>
+                    <h4>{k.kysymysteksti}</h4>
+                    <div id="valintanappidiv">
+                        {k.vaihtoehdot.map((vaihtoehto) =>
+                            <div key={vaihtoehto.id}>
+                                <div className="form-check_valintanappi">
+                                    <input
+                                        className="form-check-input_valintanappi"
+                                        data-key={vaihtoehto.id}
+                                        type="radio"
+                                        name={kIndex}
+                                        value={vaihtoehto.nimi}
+                                        onChange={HandleChange}
+                                    />
+                                    {vaihtoehto.nimi}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )
+        } else if (k.kysymystyyppi.nimi === "Monivalintakysymys") {
+            kIndex = kIndex + 1;
+            return (
+                <div>
+                    <h4>{k.kysymysteksti}</h4>
+                    <div id="monivalintadiv">
+                        {k.vaihtoehdot.map((vaihtoehto) =>
+                            <div key={vaihtoehto.id} >
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        data-key={vaihtoehto.id}
+                                        type="checkbox"
+                                        name={kIndex}
+                                        value={vaihtoehto.nimi}
+                                        onChange={HandleChange}
+                                    />
+                                    {vaihtoehto.nimi}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )
+        }
     }
 
+    
     return (
         <div>
             <h1 className="header">Kysymykset</h1>
@@ -95,20 +135,22 @@ export default function Kysely(props) {
                 kysymykset.map((k) =>
                     <div key={k.id}>
                         {monivalintaVaiTeksti(k)}
-
                     </div>
                 )
             }
             <div>
-                <Button
-                    color="success" variant="contained"
-                    onClick={saveVastaukset}
-                >Lähetä vastaukset</Button>
+                <Button color="success" variant="contained" onClick={saveVastaukset}>
+                    Lähetä vastaukset
+                </Button>
                 <Link to={`/`}>
-                    <Button color="primary" variant="contained" href={`/`}>Etusivu</Button>
+                    <Button color="primary" variant="contained" href={`/`}>
+                        Etusivu
+                    </Button>
                 </Link>
                 <Link to={`/vastaukset/${kyselyId}`}>
-                    <Button color="primary" variant="contained">Vastaukset</Button>
+                    <Button color="primary" variant="contained">
+                        Vastaukset
+                    </Button>
                 </Link>
             </div>
         </div>

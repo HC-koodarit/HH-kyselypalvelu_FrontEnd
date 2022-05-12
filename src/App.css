@@ -85,6 +85,47 @@ td {
   align-content: left;
   color: white;
 }
+
 #tabscss {
   color: white !important;
+}
+
+#monivalintadiv {
+  width: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: black;
+  border-radius: 2px;
+  border-style: dashed;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+#valintanappidiv {
+  width: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: black;
+  border-radius: 2px;
+  border-style: dashed;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.form-check-input_valintanappi {
+    float: left;
+    width: 1em;
+    height: 1em;
+}
+
+.form-check_valintanappi {
+  display: block;
+  min-height: 1.5rem;
+  margin-bottom: 0.125rem;
+}
+
+.form-control_teksti {
+  width: 300px;
+  margin: 10px;
 }
