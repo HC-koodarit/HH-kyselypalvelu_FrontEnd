@@ -16,7 +16,7 @@ function Vastaukset() {
     }, []);
 
     const fetchVastaukset = () => {
-        fetch(`http://localhost:8080/kyselyt/${id}/vastaukset`)
+        fetch('http://localhost:8080/kyselyt/' + id + '/vastaukset')
             .then(res => res.json())
             .then(data => {
                 setVastaukset(data);
@@ -25,7 +25,7 @@ function Vastaukset() {
     }
 
     const fetchKysely = () => {
-        fetch(`http://localhost:8080/kyselyt/${id}`)
+        fetch('http://localhost:8080/kyselyt/' + id)
             .then(res => res.json())
             .then(data => {
                 setKyselyid(data.id);

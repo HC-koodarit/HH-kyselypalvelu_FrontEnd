@@ -1,4 +1,3 @@
-
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import React, { useState, useEffect} from 'react';
 import { Button } from '@mui/material';
@@ -21,8 +20,8 @@ function Etusivu() {
         fetch('http://localhost:8080/kyselyt')
             //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt
             .then(res => res.json())
-            .then(items => {
-                setKyselyt(items)
+            .then(data => {
+                setKyselyt(data)
             })
             .catch(err => console.error(err))
     }
@@ -52,7 +51,7 @@ function Etusivu() {
                             <div key={kysely.id}>
                                 <div>{kysely.nimi}</div>
                                 <Link to={`/kysely/${kysely.id}`}>
-                                    <Button value={kysely.id} color="success" variant="contained">Kyselyyn</Button>
+                                    <button value={kysely.id} color="success" variant="contained">Kyselyyn</button>
                                 </Link>
                             </div>
                         )

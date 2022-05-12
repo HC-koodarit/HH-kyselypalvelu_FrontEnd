@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
-import '../App.css';
+import { Link } from 'react-router-dom';
 import { CenterFocusStrong } from '@mui/icons-material';
 
+import '../App.css';
+
 export default function Kysely(props) {
-    const kyselyId = props.match.params.id;
+    const { id } = useParams();
+    const kyselyId = id;
 
     const [kysymykset, setKysymykset] = useState([]);
 
-    //const [vastaus, setVastaus] = useState({kayttajanvastaus: "", vastaus: { vastausid : null }});
+    const [vastaus, setVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
 
-    const [textvastaus, setTextvastaus] = useState({vastausrivi: "", kysymys: { kysymysid : null }});
+    const [tekstivastaus, setTekstivastaus] = useState({vastausteksti: "", kysymys: { id : null }});
 
-    let qIndex = 0;
+    let kIndex = 0;
 
     useEffect(() => {
         fetchQuestions();
@@ -40,56 +43,73 @@ export default function Kysely(props) {
     }*/
 
     /*
-    const inputChanged = (e) => {
-        setVastaus({ kayttajanvastaus: e.target.value, vastaus: { vastausid: e.target.getAttribute('data-key') } });
+    const monivalintaInputChanged = (e) => {
+        setVastaus({ kayttajanvastaus: e.target.value, kysymys: { kysymysid: e.target.getAttribute('data-key') } });
     }*/
 
     const textInputChanged = (e) => {
-        setTextvastaus({ vastausrivi: e.target.value, kysymys: { kysymysid: e.target.getAttribute('data-key') } });
+        setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
     }
 
-    function saveVastaukset() {
-        fetch('http://localhost:8080/vastaukset', {
+    console.log(tekstivastaus);
+    console.log(kysymykset);
 
+    async function saveVastaukset () {
+        const response = await fetch('http://localhost:8080/vastaukset', {
             method: 'POST',
             mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(textvastaus)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(tekstivastaus)
+        }).catch(err => console.error(err))
+    
+        if (response.status === 200) {
+            alert(`Vastaus "${tekstivastaus.answerline}" tallennettu`, {
+                appearance: 'vastaus tallennettu!',
+            })
+        } else {
+            alert('Virhe vastauksen tallennuksessa', {
+                appearance: 'virhe'
+            })
+        }
+    }
 
-        })
+    const monivalintaVaiTeksti = (k) => {
+        kIndex = kIndex + 1;
+        return (
+            <div>
+                <h4>{k.kysymysteksti}</h4>
+                <input
+                    data-key={k.id}
+                    type="text"
+                    name={kIndex}
+                    onChange={textInputChanged}
+                />
+            </div>
+        )
     }
 
     return (
         <div>
             <h1 className="header">Kysymykset</h1>
             {
-                kysymykset.map((q) =>
-                    <div key={q.kysymysid}>
-                        <div>
-                            <h4>{q.kysymysteksti}</h4>
-                            <input
-                            data-key={q.kysymysid}
-                            type="text"
-                            name={qIndex}
-                            onChange={textInputChanged}
-                            />
-                        </div>
+                kysymykset.map((k) =>
+                    <div key={k.id}>
+                        {monivalintaVaiTeksti(k)}
+
                     </div>
                 )
             }
             <div>
                 <Button
                     color="success" variant="contained"
-                    onClick={() => {
-                    saveVastaukset();
-                    setTextvastaus("");
-                    alert("Kysymyksiin vastattu!");
-                    }}
+                    onClick={saveVastaukset}
                 >Lähetä vastaukset</Button>
-                <Button color="primary" variant="contained" href={`/`}>Etusivu</Button>
-                <Button color="primary" variant="contained" href={`/vastaukset/${kyselyId}`}>Vastaukset</Button>
+                <Link to={`/`}>
+                    <Button color="primary" variant="contained" href={`/`}>Etusivu</Button>
+                </Link>
+                <Link to={`/vastaukset/${kyselyId}`}>
+                    <Button color="primary" variant="contained">Vastaukset</Button>
+                </Link>
             </div>
         </div>
     )
