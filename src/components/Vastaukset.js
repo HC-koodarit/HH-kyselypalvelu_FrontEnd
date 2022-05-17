@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import '../App.css';
 
 function Vastaukset() {
@@ -50,8 +51,19 @@ function Vastaukset() {
     return (
         <div style={{
             backgroundColor: '#282c34',
-          }}>
-            <Button color="success" variant="contained" href={`/`}>Etusivu</Button>
+        }}>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand href="/">Kyselypalvelu</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="/">Etusivu</Nav.Link>
+                            <Nav.Link href="/Statistiikka">Statistiikka</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
             <h1 className='h1'>{nimi}</h1>
             <p>{kuvaus}</p>
             <h1>Vastaukset</h1>
