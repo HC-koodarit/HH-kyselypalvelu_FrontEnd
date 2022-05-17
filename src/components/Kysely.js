@@ -36,14 +36,20 @@ export default function Kysely(props) {
     }
 
     //Monivalinta kysymyksien vastaukselle
-    const handleCheck = (event) => {
+    const handleCheck = (e, index) => {
         var updatedList = [...checked];
-        if (event.target.checked) {
-          updatedList = [...checked, event.target.value];
+        if (e.target.checked) {
+          updatedList = [...checked, e.target.value];
         } else {
-          updatedList.splice(checked.indexOf(event.target.value), 1);
+          updatedList.splice(checked.indexOf(e.target.value), 1);
         }
         setChecked(updatedList);
+
+        setMoniVastaus({ checkedItems });
+
+        let newArr = [...vastaukset];
+        newArr[index] = { checkedItems };
+        setVastaukset(newArr);
     };
 
     var checkedItems = checked.length
@@ -52,14 +58,14 @@ export default function Kysely(props) {
         })
         : "";
 
+    console.log(checkedItems);
+
     const monivalintaHandleChange = (e, index) => {
-        setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
+        
     
             
         
-        let newArr = [...vastaukset];
-        newArr[index] = { checkedItems };
-        setVastaukset(newArr);
+        
         //console.log(index);
         
     }
@@ -154,7 +160,7 @@ export default function Kysely(props) {
                                         type="checkbox"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-                                        onChange = {handleCheck}
+                                        onChange = {(e) => handleCheck(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
