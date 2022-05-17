@@ -38,6 +38,11 @@ export default function Kysely(props) {
     const monivalintaHandleChange = (e, index) => {
         //setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
 
+        var checkedItems = checked.length
+            ? checked.reduce((total, item) => {
+        return total + ", " + item;
+        })
+        : "";
         /*
         let newArr = [...vastaukset];
         newArr[index] = { vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } };
@@ -56,11 +61,7 @@ export default function Kysely(props) {
         setChecked(updatedList);
     };
 
-    var checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-    })
-    : "";
+    
 
     const HandleChange = (e, index) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
@@ -127,12 +128,7 @@ export default function Kysely(props) {
                                         type="radio"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-<<<<<<< HEAD
                                         onChange = {(e) => HandleChange(e, index)}
-=======
-                                        index={index}
-                                        onChange={(e) => HandleChange(e, index)}
->>>>>>> d808925fe7a8c9465b0461cadd6f9d294c338541
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -156,12 +152,7 @@ export default function Kysely(props) {
                                         type="checkbox"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-<<<<<<< HEAD
                                         onChange = {handleCheck}
-=======
-                                        index={index}
-                                        onChange={(e) => HandleChange(e, index)}
->>>>>>> d808925fe7a8c9465b0461cadd6f9d294c338541
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
