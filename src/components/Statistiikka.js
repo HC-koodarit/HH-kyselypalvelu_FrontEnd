@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, PieChart, 
 import '../App.css';
 import Navigaatio from './Navigaatio';
 
-function Statistiikka() {
+export default function Statistiikka() {
   const [vastaukset, setVastaukset] = useState([{ duration: '', name: '' }]);
   const [ready, setReady] = useState(false);
   const [data, setData] = useState([]);
@@ -60,5 +60,3 @@ function Statistiikka() {
     </div>
   );
 }
-
-export default Statistiikka;

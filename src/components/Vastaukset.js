@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Navigaatio from './Navigaatio';
 
-function Vastaukset() {
+export default function Vastaukset() {
     const [kyselyid, setKyselyid] = useState(0);
     const [nimi, setNimi] = useState("");
     const [kuvaus, setKuvaus] = useState("");
@@ -57,5 +57,3 @@ function Vastaukset() {
         </div>
     )
 }
-
-export default Vastaukset;

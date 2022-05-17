@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import Navigaatio from './Navigaatio.js';
 
-function Etusivu() {
+export default function Etusivu() {
+    
     const [kyselyt, setKyselyt] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -53,5 +54,3 @@ function Etusivu() {
     )
 
 }
-
-export default Etusivu;

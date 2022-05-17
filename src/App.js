@@ -8,7 +8,8 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import Statistiikka from './components/Statistiikka';
 
-function App() {
+export default function App() {
+
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
@@ -27,5 +28,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
