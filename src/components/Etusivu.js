@@ -15,8 +15,9 @@ export default function Etusivu() {
     }, []);
 
     const fetchKysely = () => {
-        fetch('http://localhost:8080/kyselyt')
+        fetch("https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt")
             //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt
+            //http://localhost:8080/kyselyt
             .then(res => res.json())
             .then(data => {
                 setKyselyt(data)

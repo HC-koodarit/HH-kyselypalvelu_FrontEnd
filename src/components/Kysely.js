@@ -26,7 +26,9 @@ export default function Kysely(props) {
     }, []);
 
     const fetchQuestions = () => {
-        fetch(`http://localhost:8080/kyselyt/${kyselyId}`)
+        fetch(`https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}`)
+            //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}
+            //http://localhost:8080/kyselyt/${kyselyId}
             .then(res => res.json())
             .then(data => {
                 setKysymykset(data.kysymykset);
@@ -62,7 +64,9 @@ export default function Kysely(props) {
    
     //Save vastaukset funktio lähettää teksti vastaukset backendiin
     async function saveVastaukset () {
-        const response = await fetch('http://localhost:8080/vastaukset', {
+        const response = await fetch('https://kyselypalvelu-hckoodarit.herokuapp.com/vastaukset', {
+            //https://kyselypalvelu-hckoodarit.herokuapp.com/vastaukset
+            //http://localhost:8080/vastaukset
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },

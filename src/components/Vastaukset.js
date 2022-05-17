@@ -18,7 +18,9 @@ export default function Vastaukset() {
     }, []);
 
     const fetchVastaukset = () => {
-        fetch(`http://localhost:8080/kyselyt/${kyselyId}/vastaukset`)
+        fetch(`https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}/vastaukset`)
+            //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}/vastaukset
+            //http://localhost:8080/kyselyt/${kyselyId}/vastaukset
             .then(res => res.json())
             .then(data => {
                 setVastaukset(data);
@@ -27,7 +29,9 @@ export default function Vastaukset() {
     }
 
     const fetchKysely = () => {
-        fetch(`http://localhost:8080/kyselyt/${kyselyId}`)
+        fetch(`https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}`)
+            //https://kyselypalvelu-hckoodarit.herokuapp.com/kyselyt/${kyselyId}
+            //http://localhost:8080/kyselyt/${kyselyId}
             .then(res => res.json())
             .then(data => {
                 setKysymykset(data.kysymykset);
