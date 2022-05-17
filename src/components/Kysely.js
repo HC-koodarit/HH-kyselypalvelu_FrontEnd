@@ -11,9 +11,11 @@ export default function Kysely(props) {
     const kyselyId = id;
 
     const [kysymykset, setKysymykset] = useState([]);
-    //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
+    const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
     const [tekstivastaus, setTekstivastaus] = useState({ vastausteksti: "", kysymys: { id: null } });
     const [vastaukset, setVastaukset] = useState([]);
+
+    const [checked, setChecked] = useState([]);
 
     let kIndex = 0;
     let ArrIndex = 0
@@ -32,10 +34,36 @@ export default function Kysely(props) {
             .catch(err => console.error(err))
     }
 
-    /*const monivalintaHandleChange = (e) => {
-        setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
-    }*/
+    //Monivalinta kysymyksien vastaukselle
+    const handleCheck = (event) => {
+        var updatedList = [...checked];
+        if (event.target.checked) {
+          updatedList = [...checked, event.target.value];
+        } else {
+          updatedList.splice(checked.indexOf(event.target.value), 1);
+        }
+        setChecked(updatedList);
+    };
 
+    var checkedItems = checked.length
+            ? checked.reduce((total, item) => {
+        return total + ", " + item;
+        })
+        : "";
+
+    const monivalintaHandleChange = (e, index) => {
+        setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
+    
+            
+        
+        let newArr = [...vastaukset];
+        newArr[index] = { checkedItems };
+        setVastaukset(newArr);
+        //console.log(index);
+        
+    }
+
+    //Avoin kysymys vastauksille
     const HandleChange = (e, index) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
 
@@ -47,23 +75,11 @@ export default function Kysely(props) {
         //console.log(ArrIndex);
         //console.log(tekstivastaus);
     }
+
     console.log(vastaukset);
     //console.log(tekstivastaus);
-
-    /*const HandleTextSave = (e) => {
-        let newArr = [...vastaukset];
-        newArr[ArrIndex] = tekstivastaus;
-        setVastaukset(newArr);
-        ArrIndex = ArrIndex + 1;
-        console.log(vastaukset);
-        //console.log(tekstivastaus);
-    }*/
-
-    //console.log(tekstivastaus + "Tekstivastaus");
-    //console.log(kysymykset);
-    //console.log(kysymykset.kysymystyyppi)
-
-    async function saveVastaukset() {
+   
+    async function saveVastaukset () {
         const response = await fetch('http://localhost:8080/vastaukset', {
             method: 'POST',
             mode: 'cors',
@@ -113,8 +129,7 @@ export default function Kysely(props) {
                                         type="radio"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-                                        index={index}
-                                        onChange={(e) => HandleChange(e, index)}
+                                        onChange = {(e) => HandleChange(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -138,8 +153,7 @@ export default function Kysely(props) {
                                         type="checkbox"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-                                        index={index}
-                                        onChange={(e) => HandleChange(e, index)}
+                                        onChange = {handleCheck}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
