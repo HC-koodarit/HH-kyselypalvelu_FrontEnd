@@ -12,7 +12,7 @@ export default function Kysely(props) {
     const kyselyId = id;
 
     const [kysymykset, setKysymykset] = useState([]);
-    //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
+    const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
     const [tekstivastaus, setTekstivastaus] = useState({ vastausteksti: "", kysymys: { id: null } });
     const [vastaukset, setVastaukset] = useState([]);
 
@@ -35,22 +35,7 @@ export default function Kysely(props) {
             .catch(err => console.error(err))
     }
 
-    const monivalintaHandleChange = (e, index) => {
-        //setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
-
-        var checkedItems = checked.length
-            ? checked.reduce((total, item) => {
-        return total + ", " + item;
-        })
-        : "";
-        /*
-        let newArr = [...vastaukset];
-        newArr[index] = { vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } };
-        setVastaukset(newArr);
-        console.log(index);
-        */
-    }
-
+    //Monivalinta kysymyksien vastaukselle
     const handleCheck = (event) => {
         var updatedList = [...checked];
         if (event.target.checked) {
@@ -61,8 +46,25 @@ export default function Kysely(props) {
         setChecked(updatedList);
     };
 
-    
+    var checkedItems = checked.length
+            ? checked.reduce((total, item) => {
+        return total + ", " + item;
+        })
+        : "";
 
+    const monivalintaHandleChange = (e, index) => {
+        setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
+    
+            
+        
+        let newArr = [...vastaukset];
+        newArr[index] = { checkedItems };
+        setVastaukset(newArr);
+        //console.log(index);
+        
+    }
+
+    //Avoin kysymys vastauksille
     const HandleChange = (e, index) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
 
@@ -159,14 +161,10 @@ export default function Kysely(props) {
                             </div>
                         )}
                     </div>
-                    <div>
-                        {`Items checked are: ${checkedItems}`}
-                    </div>
                 </div>
             )
         }
     }
-    console.log(kIndex);
 
 
     return (
