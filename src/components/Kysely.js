@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { CenterFocusStrong } from '@mui/icons-material';
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 
 import '../App.css';
+import Navigaatio from './Navigaatio';
 
 export default function Kysely(props) {
     const { id } = useParams();
@@ -175,19 +174,7 @@ export default function Kysely(props) {
 
     return (
         <div>
-            <Navbar bg="light" expand="lg">
-                <Container>
-                    <Navbar.Brand href="/">Kyselypalvelu</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="/">Etusivu</Nav.Link>
-                            <Nav.Link href="/Statistiikka">Statistiikka</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            
+            <Navigaatio />
             <h1 className="header">Kysymykset</h1>
             {
                 kysymykset.map((k, index) =>
