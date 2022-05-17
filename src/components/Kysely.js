@@ -13,8 +13,10 @@ export default function Kysely(props) {
     const [kysymykset, setKysymykset] = useState([]);
     //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
     const [tekstivastaus, setTekstivastaus] = useState({vastausteksti: "", kysymys: { id : null }});
+    const [vastaukset, setVastaukset] = useState([]);
 
     let kIndex = 0;
+    let ArrIndex = 0
 
     useEffect(() => {
         fetchQuestions();
@@ -25,7 +27,7 @@ export default function Kysely(props) {
             .then(res => res.json())
             .then(data => {
                 setKysymykset(data.kysymykset);
-                console.log(data.kysymykset);
+                //console.log(data.kysymykset);
             })
             .catch(err => console.error(err))
     }
@@ -34,11 +36,30 @@ export default function Kysely(props) {
         setMoniVastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
     }*/
 
-    const HandleChange = (e) => {
+    const HandleChange = (e, index) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
+        
+        let newArr = [...vastaukset];
+        newArr[index] = { vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } };
+        setVastaukset(newArr);
+        console.log(index);
+        //ArrIndex = ArrIndex + 1;
+        //console.log(ArrIndex);
+        //console.log(tekstivastaus);
     }
-
+    console.log(vastaukset);
     //console.log(tekstivastaus);
+
+    /*const HandleTextSave = (e) => {
+        let newArr = [...vastaukset];
+        newArr[ArrIndex] = tekstivastaus;
+        setVastaukset(newArr);
+        ArrIndex = ArrIndex + 1;
+        console.log(vastaukset);
+        //console.log(tekstivastaus);
+    }*/
+
+    //console.log(tekstivastaus + "Tekstivastaus");
     //console.log(kysymykset);
     //console.log(kysymykset.kysymystyyppi)
    
@@ -47,11 +68,12 @@ export default function Kysely(props) {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(tekstivastaus)
+            //body: JSON.stringify(tekstivastaus)
+            body: JSON.stringify(vastaukset)
         }).catch(err => console.error(err))
     
         if (response.status === 200) {
-            alert(`Vastaus "${tekstivastaus.answerline}" tallennettu`, {
+            alert(`Vastaus "${tekstivastaus}" tallennettu`, {
                 appearance: 'vastaus tallennettu!',
             })
         } else {
@@ -61,7 +83,7 @@ export default function Kysely(props) {
         }
     }
 
-    const monivalintaVaiTeksti = (k) => {
+    const monivalintaVaiTeksti = (k, index) => {
         if (k.kysymystyyppi.nimi === "Avoinkysymys") {
             kIndex = kIndex + 1;
             return (
@@ -72,7 +94,7 @@ export default function Kysely(props) {
                         data-key={k.id}
                         type="text"
                         name={kIndex}
-                        onChange={HandleChange}
+                        onChange = {(e) => HandleChange(e, index)}
                     />
                 </div>
             )
@@ -87,11 +109,12 @@ export default function Kysely(props) {
                                 <div className="form-check_valintanappi">
                                     <input
                                         className="form-check-input_valintanappi"
-                                        data-key={vaihtoehto.id}
+                                        data-key={k.id}
                                         type="radio"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-                                        onChange={HandleChange}
+                                        index={index}
+                                        onChange = {(e) => HandleChange(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -111,11 +134,12 @@ export default function Kysely(props) {
                                 <div className="form-check">
                                     <input
                                         className="form-check-input"
-                                        data-key={vaihtoehto.id}
+                                        data-key={k.id}
                                         type="checkbox"
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
-                                        onChange={HandleChange}
+                                        index={index}
+                                        onChange = {(e) => HandleChange(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -132,9 +156,9 @@ export default function Kysely(props) {
         <div>
             <h1 className="header">Kysymykset</h1>
             {
-                kysymykset.map((k) =>
-                    <div key={k.id}>
-                        {monivalintaVaiTeksti(k)}
+                kysymykset.map((k, index) =>
+                    <div key={k.id} index={index}>
+                        {monivalintaVaiTeksti(k, index)}
                     </div>
                 )
             }
