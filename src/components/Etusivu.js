@@ -7,6 +7,7 @@ import PopUp from './PopUp.js'
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import Statistiikka from './Statistiikka.js';
 
 function Etusivu() {
     const [kyselyt, setKyselyt] = useState([]);
@@ -35,11 +36,12 @@ function Etusivu() {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="/">Etusivu</Nav.Link>
+                    <Nav.Link href="/Statistiikka">Statistiikka</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
             </Navbar>
-            <h1>ETUSIVU</h1>
+            <h1>Kyselyt</h1>
                     {
                         kyselyt.map((kysely, index) =>
                             /*<tr key={index}>

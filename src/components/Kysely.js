@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CenterFocusStrong } from '@mui/icons-material';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 
 import '../App.css';
 
@@ -12,7 +13,7 @@ export default function Kysely(props) {
 
     const [kysymykset, setKysymykset] = useState([]);
     //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
-    const [tekstivastaus, setTekstivastaus] = useState({vastausteksti: "", kysymys: { id : null }});
+    const [tekstivastaus, setTekstivastaus] = useState({ vastausteksti: "", kysymys: { id: null } });
     const [vastaukset, setVastaukset] = useState([]);
 
     let kIndex = 0;
@@ -38,7 +39,7 @@ export default function Kysely(props) {
 
     const HandleChange = (e, index) => {
         setTekstivastaus({ vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } });
-        
+
         let newArr = [...vastaukset];
         newArr[index] = { vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } };
         setVastaukset(newArr);
@@ -62,8 +63,8 @@ export default function Kysely(props) {
     //console.log(tekstivastaus + "Tekstivastaus");
     //console.log(kysymykset);
     //console.log(kysymykset.kysymystyyppi)
-   
-    async function saveVastaukset () {
+
+    async function saveVastaukset() {
         const response = await fetch('http://localhost:8080/vastaukset', {
             method: 'POST',
             mode: 'cors',
@@ -71,7 +72,7 @@ export default function Kysely(props) {
             //body: JSON.stringify(tekstivastaus)
             body: JSON.stringify(vastaukset)
         }).catch(err => console.error(err))
-    
+
         if (response.status === 200) {
             alert(`Vastaus "${tekstivastaus}" tallennettu`, {
                 appearance: 'vastaus tallennettu!',
@@ -94,7 +95,7 @@ export default function Kysely(props) {
                         data-key={k.id}
                         type="text"
                         name={kIndex}
-                        onChange = {(e) => HandleChange(e, index)}
+                        onChange={(e) => HandleChange(e, index)}
                     />
                 </div>
             )
@@ -114,7 +115,7 @@ export default function Kysely(props) {
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
                                         index={index}
-                                        onChange = {(e) => HandleChange(e, index)}
+                                        onChange={(e) => HandleChange(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -139,7 +140,7 @@ export default function Kysely(props) {
                                         name={kIndex}
                                         value={vaihtoehto.nimi}
                                         index={index}
-                                        onChange = {(e) => HandleChange(e, index)}
+                                        onChange={(e) => HandleChange(e, index)}
                                     />
                                     {vaihtoehto.nimi}
                                 </div>
@@ -151,9 +152,22 @@ export default function Kysely(props) {
         }
     }
 
-    
+
     return (
         <div>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand href="/">Kyselypalvelu</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="/">Etusivu</Nav.Link>
+                            <Nav.Link href="/Statistiikka">Statistiikka</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            
             <h1 className="header">Kysymykset</h1>
             {
                 kysymykset.map((k, index) =>

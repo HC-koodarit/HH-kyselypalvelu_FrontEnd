@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
+import Statistiikka from './components/Statistiikka';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                 <Route exact path="/" element={<Etusivu />} />
                 <Route path="/kysely/:id" element={<Kysely />} />
                 <Route path="/vastaukset/:id" element={<Vastaukset />} />
+                <Route path="/Statistiikka" element={<Statistiikka />} />
                 <Route render={() => <h1>Page not found</h1>} />
             </Routes>
           </Router>
