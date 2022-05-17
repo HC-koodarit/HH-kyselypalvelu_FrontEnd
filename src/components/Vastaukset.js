@@ -48,9 +48,7 @@ function Vastaukset() {
     );
 
     return (
-        <div style={{
-            backgroundColor: '#282c34',
-        }}>
+        <div>
             <Navigaatio />
             <h1 className='h1'>{nimi}</h1>
             <p>{kuvaus}</p>

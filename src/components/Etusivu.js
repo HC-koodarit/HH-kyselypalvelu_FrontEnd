@@ -26,7 +26,7 @@ function Etusivu() {
     }
 
     return (
-        <div class="etusivu">
+            <div>
             <Navigaatio />
             <h1>Kyselyt</h1>
             {
