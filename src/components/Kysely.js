@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 import '../App.css';
 import Navigaatio from './Navigaatio';
@@ -12,14 +13,13 @@ export default function Kysely(props) {
     const kyselyId = id;
 
     const [kysymykset, setKysymykset] = useState([]);
-    const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
+    //const [monivastaus, setMoniVastaus] = useState({vastausteksti: "", kysymys: { id : null }});
     const [tekstivastaus, setTekstivastaus] = useState({ vastausteksti: "", kysymys: { id: null } });
     const [vastaukset, setVastaukset] = useState([]);
 
     const [checked, setChecked] = useState([]);
 
     let kIndex = 0;
-    let ArrIndex = 0
 
     useEffect(() => {
         fetchQuestions();
@@ -30,44 +30,25 @@ export default function Kysely(props) {
             .then(res => res.json())
             .then(data => {
                 setKysymykset(data.kysymykset);
-                //console.log(data.kysymykset);
             })
             .catch(err => console.error(err))
     }
 
     //Monivalinta kysymyksien vastaukselle
     const handleCheck = (e, index) => {
+        var kysymysid = e.target.getAttribute('data-key');
         var updatedList = [...checked];
-        if (e.target.checked) {
-          updatedList = [...checked, e.target.value];
-        } else {
-          updatedList.splice(checked.indexOf(e.target.value), 1);
-        }
-        setChecked(updatedList);
-
-        setMoniVastaus({ checkedItems });
 
         let newArr = [...vastaukset];
-        newArr[index] = { checkedItems };
+        if (e.target.checked) {
+            updatedList = [...checked, e.target.value];
+            newArr[index] = { vastausteksti: updatedList.join(", "), kysymys: { id: kysymysid } };
+        } else {
+            updatedList.splice(checked.indexOf(e.target.value), 1);
+            newArr[index] = { vastausteksti: updatedList.join(", "), kysymys: { id: kysymysid } };
+        }
         setVastaukset(newArr);
-    };
-
-    var checkedItems = checked.length
-            ? checked.reduce((total, item) => {
-        return total + ", " + item;
-        })
-        : "";
-
-    console.log(checkedItems);
-
-    const monivalintaHandleChange = (e, index) => {
-        
-    
-            
-        
-        
-        //console.log(index);
-        
+        setChecked(updatedList);
     }
 
     //Avoin kysymys vastauksille
@@ -77,32 +58,23 @@ export default function Kysely(props) {
         let newArr = [...vastaukset];
         newArr[index] = { vastausteksti: e.target.value, kysymys: { id: e.target.getAttribute('data-key') } };
         setVastaukset(newArr);
-        console.log(index);
-        //ArrIndex = ArrIndex + 1;
-        //console.log(ArrIndex);
-        //console.log(tekstivastaus);
     }
-
-    console.log(vastaukset);
-    //console.log(tekstivastaus);
    
+    //Save vastaukset funktio lähettää teksti vastaukset backendiin
     async function saveVastaukset () {
         const response = await fetch('http://localhost:8080/vastaukset', {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
-            //body: JSON.stringify(tekstivastaus)
             body: JSON.stringify(vastaukset)
         }).catch(err => console.error(err))
 
         if (response.status === 200) {
-            alert(`Vastaus "${tekstivastaus}" tallennettu`, {
-                appearance: 'vastaus tallennettu!',
-            })
+            toast.success('Vastaukset tallennettu!')
+        } else if (response.status === 500) {
+            toast.error("Vastaa kaikkiin kysymyksiin")
         } else {
-            alert('Virhe vastauksen tallennuksessa', {
-                appearance: 'virhe'
-            })
+            toast.error("Virhe vastauksen tallennuksessan")
         }
     }
 
@@ -185,19 +157,25 @@ export default function Kysely(props) {
                 )
             }
             <div>
-                <Button color="success" variant="contained" onClick={saveVastaukset}>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
+                <div>
+                <Button color="success" variant="contained" id="buttonwithmargin" onClick={saveVastaukset}>
                     Lähetä vastaukset
                 </Button>
                 <Link to={`/`}>
-                    <Button color="primary" variant="contained" href={`/`}>
+                    <Button color="primary" variant="contained" id="buttonwithmargin">
                         Etusivu
                     </Button>
                 </Link>
                 <Link to={`/vastaukset/${kyselyId}`}>
-                    <Button color="primary" variant="contained">
+                    <Button color="primary" variant="contained" id="buttonwithmargin">
                         Vastaukset
                     </Button>
                 </Link>
+                </div>
             </div>
         </div>
     )

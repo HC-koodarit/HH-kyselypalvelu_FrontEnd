@@ -51,11 +51,13 @@
   height: 30px;
   }
 
-.nobullets {
-  list-style-type: none; 
-  padding: 0; 
-  margin: 0;
+/* vaustaukset.js css */
+.vastauksetdiv {
   color: grey; 
+}
+
+.kysymyslistadiv {
+  margin: 20px;
 }
 
 table {
@@ -128,4 +130,13 @@ td {
 .form-control_teksti {
   width: 300px;
   margin: 10px;
+}
+
+#buttonwithmargin {
+  margin: 5px;
+  margin-bottom: 20px;
+}
+
+#divwithmargin {
+  height: 80px;
 }

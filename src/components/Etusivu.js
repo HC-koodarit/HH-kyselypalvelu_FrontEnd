@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
-import PopUp from './PopUp.js'
+import { Button } from '@mui/material';
 
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,9 +8,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 import Navigaatio from './Navigaatio.js';
 
 export default function Etusivu() {
-    
     const [kyselyt, setKyselyt] = useState([]);
-    const [buttonPopup, setButtonPopup] = useState(false);
 
     useEffect(() => {
         fetchKysely();
@@ -32,24 +30,14 @@ export default function Etusivu() {
             <h1>Kyselyt</h1>
             {
                 kyselyt.map((kysely, index) =>
-                    /*<tr key={index}>
-                        <td>{kysely.nimi}</td>
-                        <td>{kysely.kuvaus}</td>
-                        <td><Button color="success" variant="contained" href={`kysely/${kysely.id}`}>Kyselyyn</Button></td>
-                        <td><Button color="primary" variant="contained" href={`vastaukset/${kysely.id}`}>Vastaukset</Button></td>
-                    </tr>*/
-                    <div key={kysely.id}>
+                    <div key={kysely.id} id="divwithmargin">
                         <div>{kysely.nimi}</div>
                         <Link to={`/kysely/${kysely.id}`}>
-                            <button value={kysely.id} color="success" variant="contained">Kyselyyn</button>
+                            <Button value={kysely.id} color="success" variant="contained">Kyselyyn</Button>
                         </Link>
                     </div>
                 )
             }
-            <div>
-                <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-                </PopUp>
-            </div>
         </div>
     )
 

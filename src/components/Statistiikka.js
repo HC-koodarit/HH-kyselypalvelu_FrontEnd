@@ -1,6 +1,6 @@
 import { groupBy, sumBy } from 'lodash';
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import '../App.css';
 import Navigaatio from './Navigaatio';
 
@@ -11,7 +11,7 @@ export default function Statistiikka() {
 
   let trainingsArray = [];
 
-  const COLORS = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD', '#323232'];
+  //const COLORS = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD', '#323232'];
 
   useEffect(() => {
     fetchData();

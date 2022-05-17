@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import { useParams } from 'react-router-dom';
 import Navigaatio from './Navigaatio';
 
+import '../App.css';
+
 export default function Vastaukset() {
-    const [kyselyid, setKyselyid] = useState(0);
-    const [nimi, setNimi] = useState("");
-    const [kuvaus, setKuvaus] = useState("");
+    const { id } = useParams();
+    const kyselyId = id;
+
     const [kysymykset, setKysymykset] = useState([]);
-    const [id, setId] = useState(window.location.href.split('/').pop());
+    const [kysely, setKysely] = useState([]);
     const [vastaukset, setVastaukset] = useState([]);
 
     useEffect(() => {
@@ -16,7 +18,7 @@ export default function Vastaukset() {
     }, []);
 
     const fetchVastaukset = () => {
-        fetch(`http://localhost:8080/kyselyt/${id}/vastaukset`)
+        fetch(`http://localhost:8080/kyselyt/${kyselyId}/vastaukset`)
             .then(res => res.json())
             .then(data => {
                 setVastaukset(data);
@@ -25,34 +27,32 @@ export default function Vastaukset() {
     }
 
     const fetchKysely = () => {
-        fetch(`http://localhost:8080/kyselyt/${id}`)
+        fetch(`http://localhost:8080/kyselyt/${kyselyId}`)
             .then(res => res.json())
             .then(data => {
-                setKyselyid(data.id);
-                setNimi(data.nimi);
-                setKuvaus(data.kuvaus);
                 setKysymykset(data.kysymykset);
+                setKysely(data);
             })
             .catch(err => console.error(err))
     }
 
     const kysymyslista = kysymykset.map((kysymys) =>
-        <div>
+        <div className="kysymyslistadiv">
             <h2>{kysymys.kysymysteksti}</h2>
-            <ul className='nobullets'>{
-                vastaukset.filter(vastaus => vastaus.kysymys.id == kysymys.id).map((kysymyksenVastaus) =>
-                    <li>{kysymyksenVastaus.vastausteksti}</li>
+            <div className="vastauksetdiv">{
+                vastaukset.filter(vastaus => vastaus.kysymys.id === kysymys.id).map((kysymyksenVastaus) =>
+                    <div>{kysymyksenVastaus.vastausteksti}</div>
                 )
-            }</ul>
+            }</div>
         </div>
     );
-
+    
     return (
         <div>
             <Navigaatio />
-            <h1 className='h1'>{nimi}</h1>
-            <p>{kuvaus}</p>
-            <h1>Vastaukset</h1>
+            <h1 className='h1'>{kysely.nimi}</h1>
+            <p>{kysely.kuvaus}</p>
+            <h1>Vastaukset:</h1>
             <div>{kysymyslista}</div>
         </div>
     )
